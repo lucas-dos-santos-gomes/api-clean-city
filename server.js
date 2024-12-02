@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// User
 app.post('/users', async (req, res) => {
   await prisma.user.create({
     data: {
@@ -41,6 +42,71 @@ app.put('/users/:id', async (req, res) => {
 
 app.delete('/users/:id', async (req, res) => {
   await prisma.user.delete({
+    where: {
+      id: req.params.id,
+    }
+  });
+  res.status(200).json({message: "Usuário deletado com sucesso!"});
+});
+
+// Report
+app.post('/reports', async (req, res) => {
+  if(req.body.img) {
+    await prisma.report.create({
+      data: {
+        local:req.body.local,
+        description: req.body.description,
+        user_id: req.body.userId,
+        img: req.body.img,
+      }
+    });
+  } else {
+    await prisma.report.create({
+      data: {
+        local:req.body.local,
+        description: req.body.description,
+        user_id: req.body.userId,
+      }
+    });
+  }
+  res.status(201).json({message: 'O post deu certo!'});
+});
+
+app.get('/reports', async (req, res) => {
+  const reports = await prisma.report.findMany();
+  res.status(200).json(reports);
+});
+
+app.put('/reports/:id', async (req, res) => {
+  if(req.body.img) {
+    await prisma.report.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        local:req.body.local,
+        description: req.body.description,
+        user_id: req.body.userId,
+        img: req.body.img,
+      }
+    });
+  } else {
+    await prisma.report.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        local:req.body.local,
+        description: req.body.description,
+        user_id: req.body.userId,
+      }
+    });
+  }
+  res.status(201).json({message: `Os dados de ${req.body.name} foram alterados.`});
+});
+
+app.delete('/reports/:id', async (req, res) => {
+  await prisma.report.delete({
     where: {
       id: req.params.id,
     }

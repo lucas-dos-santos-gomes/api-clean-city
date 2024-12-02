@@ -14,9 +14,17 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
   name      String
   password  String
   admin     Boolean  @default(false)
+}
+
+model Report {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  local        String   
+  description  String
+  img          String?
+  user_id      String
 }
