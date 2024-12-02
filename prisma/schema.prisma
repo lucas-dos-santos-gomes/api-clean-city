@@ -25,6 +25,7 @@ model Report {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   local        String   
   description  String
+  date         String
   img          String?
   user_id      String
 }

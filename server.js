@@ -57,6 +57,7 @@ app.post('/reports', async (req, res) => {
         local:req.body.local,
         description: req.body.description,
         user_id: req.body.userId,
+        date: req.body.date,
         img: req.body.img,
       }
     });
@@ -66,6 +67,7 @@ app.post('/reports', async (req, res) => {
         local:req.body.local,
         description: req.body.description,
         user_id: req.body.userId,
+        date: req.body.date,
       }
     });
   }
@@ -87,6 +89,7 @@ app.put('/reports/:id', async (req, res) => {
         local:req.body.local,
         description: req.body.description,
         user_id: req.body.userId,
+        date: req.body.date,
         img: req.body.img,
       }
     });
@@ -99,6 +102,7 @@ app.put('/reports/:id', async (req, res) => {
         local:req.body.local,
         description: req.body.description,
         user_id: req.body.userId,
+        date: req.body.date,
       }
     });
   }
